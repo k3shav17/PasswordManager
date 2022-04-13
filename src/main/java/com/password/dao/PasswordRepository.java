@@ -1,5 +1,6 @@
 package com.password.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -13,4 +14,7 @@ public interface PasswordRepository extends MongoRepository<PasswordManager, Str
 
 	@Query(value = "{'siteName' : {$regex : ?0, $options: 'i'}}")
 	Optional<PasswordManager> findPasswordManagerBySiteName(String siteName);
+
+	@Query(value = "{'mailId' : {$regex : ?0, $options: 'i'}}")
+	List<PasswordManager> findPasswordManagerByMailId(String mailId);
 }
