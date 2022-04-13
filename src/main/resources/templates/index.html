@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Password Manager</title>
+</head>
+<body>
+
+	<h3>Hello Passwords!</h3>
+
+	<div th:switch="${passes}">
+		<div th:case="*">
+
+			<table>
+				<tbody>
+					<tr th:each="user : ${passes}">
+						<td><a th:href="@{/get/}">Edit</a></td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p>
+			<a href="/get">Get all passes</a>
+		</p>
+	</div>
+</body>
+</html>

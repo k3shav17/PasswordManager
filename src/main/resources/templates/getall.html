@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>All passes</title>
+</head>
+<body>
+
+	<h3>inside get all</h3>
+	<div th:switch="${passes}">
+
+		<h2 th:case="null">All the passwords</h2>
+		<div th:case="*">
+			<h2>PassKey</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>site name</th>
+						<th>password</th>
+						<th>mail id</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="pass : ${passes}">
+						<td th:text="${pass.siteName}"></td>
+						<td th:text="${pass.password}"></td>
+						<td th:text="${pass.mailId}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
