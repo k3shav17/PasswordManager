@@ -14,6 +14,13 @@ public class PasswordManager {
 	private String password;
 	private String mailId;
 
+	public PasswordManager(String siteName, String password, String mailId) {
+		super();
+		this.siteName = siteName;
+		this.password = password;
+		this.mailId = mailId;
+	}
+
 	public String getSiteName() {
 		return siteName;
 	}
