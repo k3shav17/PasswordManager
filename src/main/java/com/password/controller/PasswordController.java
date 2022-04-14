@@ -45,7 +45,7 @@ public class PasswordController {
 //		model.addAttribute("passes", passwordRepository.findAll());
 //		return "index";
 //	}
-	
+
 	@GetMapping("/get")
 	private String getPass(Model model) {
 
@@ -53,10 +53,18 @@ public class PasswordController {
 		return "getall";
 	}
 
-	@GetMapping("/get/{mailId}")
-	private @ResponseBody List<PasswordManager> getByMailId(@PathVariable String mailId) {
+//	@GetMapping("/get/mailId/{mailId}")
+//	private @ResponseBody List<PasswordManager> getByMailId(@PathVariable String mailId) {
+//
+//		return passwordRepository.findPasswordManagerByMailId(mailId);
+//	}
 
-		return passwordRepository.findPasswordManagerByMailId(mailId);
+	@GetMapping("/get/mailId/{mailId}")
+	private String getByMailId(@PathVariable String mailId, Model model) {
+
+		model.addAttribute("mail_id", passwordRepository.findPasswordManagerByMailId(mailId));
+
+		return "mailid";
 	}
 
 	@GetMapping("/get/siteName/{siteName}")

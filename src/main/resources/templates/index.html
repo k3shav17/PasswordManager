@@ -8,21 +8,22 @@
 
 	<h3>Hello Passwords!</h3>
 
-	<div th:switch="${passes}">
-		<div th:case="*">
+	<p>
+		<a href="/get">Get all passes</a>
+	</p>
 
-			<table>
-				<tbody>
-					<tr th:each="user : ${passes}">
-						<td><a th:href="@{/get/}">Edit</a></td>
+	<!-- <form action="#"
+		th:action="@{/get/mailId/{mailId}(mail=${mail_id.mailId))}"
+		th:obhect="${mail_id}" method="get">
+		<label for="mail">Mail ID</label> <input type="text"
+			th:field="*{email}" id="email"> <input type="submit"
+			value="get by mail">
+	</form> -->
 
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<p>
-			<a href="/get">Get all passes</a>
-		</p>
-	</div>
+	<p>
+		<a href="/get/mailId/{mailId}(mail=${mail_id.mailId))}">mails </a>
+	</p>
+
+	<!--  first of all, I have to redirect to a html to fill the mail id and then redirect it to the html which shows password with that mail id -->
 </body>
 </html>
