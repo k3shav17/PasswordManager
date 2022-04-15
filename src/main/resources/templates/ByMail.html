@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Here we go</title>
+</head>
+<body>
+
+	<div>
+		<h4>Getting pass</h4>
+		<form action="#"
+			th:action="@{/get/mailId/{mailId}(mailId=${viewManager.mailId})}"
+			th:object="${viewManager}" method="GET">
+			<input type="text" th:field="*{mailId}" name="mailId"
+				placeholder="mail id">
+			<button type="submit">get</button>
+		</form>
+	</div>
+</body>
+</html>

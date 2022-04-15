@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pass Gen</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+
+	<div>
+
+		<h4>generating pass</h4>
+		<form action="#" th:action="@{/add}" th:object="${viewManager}"
+			method="POST">
+
+			<input type="text" th:field="*{siteName}" name="siteName" placeholder="site name">
+			<input type="text" th:field="*{mailId}" name="mailId" placeholder="mail id">
+			<button type="submit">generate</button>
+		</form>
+	</div>
+</body>
+</html>

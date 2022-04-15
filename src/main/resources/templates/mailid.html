@@ -1,35 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Pass keys by mail id</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
 </head>
 <body>
 
 
-	<h3>inside mail id</h3>
-	<div th:switch="${mail_id}">
-		<h2 th:case="null">All pass keys by mail id</h2>
+	<h3>inside get by mail</h3>
+	<div th:switch="${passes}">
 
-		<h2>Pass key</h2>
+		<h2 th:case="null">passwords for ${passes.mailId}</h2>
+		<div th:case="*">
+			<h2>PassKey</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>site name</th>
+						<th>password</th>
+						<th>mail id</th>
 
-		<table>
-			<thead>
-				<tr>
-					<th>site name</th>
-					<th>password</th>
-					<th>mail id</th>
-
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="pass : ${mail_id}">
-					<td th:text="${pass.siteName}"></td>
-					<td th:text="${pass.password}"></td>
-					<td th:text="${pass.mailId}"></td>
-				</tr>
-			</tbody>
-		</table>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="pass : ${passes}">
+						<td th:text="${pass.siteName}"></td>
+						<td th:text="${pass.password}"></td>
+						<td th:text="${pass.mailId}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

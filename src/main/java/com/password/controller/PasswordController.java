@@ -1,6 +1,5 @@
 package com.password.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.password.dao.PasswordRepository;
@@ -34,17 +33,17 @@ public class PasswordController {
 	static String toastMessage = "";
 
 	@PostMapping("/add")
-	private @ResponseBody Object postPass(@RequestBody ViewManager viewManager) {
-
-		return passwordManagerService.savePassword(viewManager);
+	private String postPass(@ModelAttribute("viewManager") ViewManager viewManager) {
+		passwordManagerService.savePassword(viewManager);
+		return "redirect:/";
 	}
 
-//	@GetMapping("/get")
-//	private @ResponseBody List<PasswordManager> getPass(Model model) {
-//
-//		model.addAttribute("passes", passwordRepository.findAll());
-//		return "index";
-//	}
+	@GetMapping("/addDupe")
+	private String postPassDupe(Model model) {
+		ViewManager viewManager = new ViewManager();
+		model.addAttribute("viewManager", viewManager);
+		return "newpass";
+	}
 
 	@GetMapping("/get")
 	private String getPass(Model model) {
@@ -53,18 +52,19 @@ public class PasswordController {
 		return "getall";
 	}
 
-//	@GetMapping("/get/mailId/{mailId}")
-//	private @ResponseBody List<PasswordManager> getByMailId(@PathVariable String mailId) {
-//
-//		return passwordRepository.findPasswordManagerByMailId(mailId);
-//	}
+	@GetMapping("/getByDupe")
+	private String getByMailDupe(Model model) {
+		ViewManager viewManager = new ViewManager();
+		model.addAttribute("viewManager", viewManager);
+		return "ByMail";
+	}
 
 	@GetMapping("/get/mailId/{mailId}")
 	private String getByMailId(@PathVariable String mailId, Model model) {
 
-		model.addAttribute("mail_id", passwordRepository.findPasswordManagerByMailId(mailId));
+		model.addAttribute("passes", passwordRepository.findPasswordManagerByMailId(mailId));
 
-		return "mailid";
+		return "getall";
 	}
 
 	@GetMapping("/get/siteName/{siteName}")
