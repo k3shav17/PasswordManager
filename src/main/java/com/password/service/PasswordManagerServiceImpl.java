@@ -22,17 +22,30 @@ public class PasswordManagerServiceImpl implements PasswordManagerService {
 	public Object savePassword(ViewManager viewManager) {
 		String isSiteName = viewManager.getSiteName();
 
-		passwordRepository.findPasswordManagerBySiteName(isSiteName).ifPresentOrElse(s -> {
-			toastMessage = isSiteName + " already present in the records";
-		}, () -> {
+//		passwordRepository.findPasswordManagerBySiteName(isSiteName).ifPresentOrElse(s -> {
+//			toastMessage = isSiteName + " already present in the records";
+//		}, () -> {
+//
+//			String password = passwordGenerationService.generatedPassword();
+//
+//			PasswordManager passwordManager = new PasswordManager(viewManager.getSiteName(), password,
+//					viewManager.getMailId());
+//			passwordRepository.save(passwordManager);
+//			toastMessage = isSiteName + " has been added to records";
+//		});
 
+		if (passwordRepository.findPasswordManagerBySiteName(isSiteName).isEmpty()) {
 			String password = passwordGenerationService.generatedPassword();
 
 			PasswordManager passwordManager = new PasswordManager(viewManager.getSiteName(), password,
 					viewManager.getMailId());
 			passwordRepository.save(passwordManager);
 			toastMessage = isSiteName + " has been added to records";
-		});
+
+		} else {
+			toastMessage = isSiteName + " already present in the records";
+
+		}
 
 		return toastMessage;
 	}
