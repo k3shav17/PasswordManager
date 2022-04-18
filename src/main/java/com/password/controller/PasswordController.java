@@ -1,19 +1,15 @@
 package com.password.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.password.dao.PasswordRepository;
-import com.password.entity.PasswordManager;
 import com.password.entity.ViewManager;
 import com.password.service.PasswordGenerationService;
 import com.password.service.PasswordManagerService;
@@ -59,18 +55,26 @@ public class PasswordController {
 		return "ByMail";
 	}
 
-	@GetMapping("/get/mailId/{mailId}")
-	private String getByMailId(@PathVariable String mailId, Model model) {
+	@GetMapping("/get/mail/{mailId}")
+	private String getByMailId(@RequestParam String mailId, Model model) {
 
 		model.addAttribute("passes", passwordRepository.findPasswordManagerByMailId(mailId));
 
 		return "getall";
 	}
 
-	@GetMapping("/get/siteName/{siteName}")
-	private @ResponseBody Optional<PasswordManager> getBySiteName(@PathVariable String siteName) {
+	@GetMapping("/getsite")
+	private String getBySiteDupe(Model model) {
+		ViewManager viewManager = new ViewManager();
+		model.addAttribute("viewManager", viewManager);
+		return "getbysite";
+	}
 
-		return passwordRepository.findPasswordManagerBySiteName(siteName);
+	@GetMapping("/get/siteName/{siteName}")
+	private String getBySiteName(@RequestParam String siteName, Model model) {
+
+		model.addAttribute("passes", passwordRepository.findPasswordManagerBySiteName(siteName));
+		return "getall";
 	}
 
 	@DeleteMapping("/clear")

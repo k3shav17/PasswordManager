@@ -21,6 +21,10 @@ public class PasswordManager {
 		this.mailId = mailId;
 	}
 
+	public PasswordManager() {
+		
+	}
+
 	public String getSiteName() {
 		return siteName;
 	}

@@ -8,8 +8,7 @@
 
 	<div>
 		<h4>Getting pass</h4>
-		<form action="#"
-			th:action="@{/get/mailId/{mailId}(mailId=${viewManager.mailId})}"
+		<form th:action="@{/get/mail/{(mailId=${viewManager.mailId})}}"
 			th:object="${viewManager}" method="GET">
 			<input type="text" th:field="*{mailId}" name="mailId"
 				placeholder="mail id">
